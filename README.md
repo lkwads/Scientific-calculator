@@ -1,15 +1,15 @@
-Project Title
+#Project Title
 
-Scientific Calculator in C Without math.h Library
+###Scientific Calculator in C Without math.h Library
 
-Project Description
+##Project Description
 
 This project consists of developing a scientific calculator using the C programming language, implemented without using the standard mathematical library (math.h).
 All mathematical functions are manually implemented using numerical methods, polynomial approximations, and bit-level manipulations, making this project both educational and low-level oriented.
 
 The calculator runs in console mode and allows the user to perform a wide range of basic and advanced mathematical operations through an interactive menu.
 
-Objectives
+##Objectives
 
 Understand how mathematical functions work internally
 
@@ -21,8 +21,8 @@ Practice floating-point manipulation and bitwise operations
 
 Strengthen skills in C programming and algorithmic thinking
 
-Features
-1. Basic Arithmetic Operations
+##Features
+###1. Basic Arithmetic Operations
 
 Addition
 
@@ -32,7 +32,7 @@ Multiplication
 
 Division (with division-by-zero protection)
 
-2. Advanced Mathematical Operations
+###2. Advanced Mathematical Operations
 
 Factorial
 
@@ -44,7 +44,7 @@ Reciprocal (1/x)
 
 Root calculation of any order using Newton–Raphson method
 
-3. Trigonometric Functions
+###3. Trigonometric Functions
 
 Sine (sin x)
 
@@ -54,7 +54,7 @@ Tangent (tan x = sin x / cos x)
 
 All trigonometric functions are implemented using Taylor series approximation with angle normalization.
 
-4. Exponential and Logarithmic Functions
+###4. Exponential and Logarithmic Functions
 
 Exponential function exp(x)
 
@@ -88,7 +88,7 @@ Domain validation for ln(x), √x, inverse(x)
 
 Protection against invalid operations
 
-Conclusion
+##Conclusion
 
 This scientific calculator is a complete and educational implementation that reproduces core mathematical functions from scratch.
 By avoiding math.h, the project highlights how complex mathematical operations can be built using algorithms, approximations, and binary arithmetic, making it a strong example of applied computer science and numerical computing.
