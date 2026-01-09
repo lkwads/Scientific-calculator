@@ -1,0 +1,31 @@
+ln(x) idea : 
+	https://stackoverflow.com/questions/9799041/efficient-implementation-of-natural-logarithm-ln-and-exponentiation/44232045#44232045 
+	
+	code : https://gist.github.com/LingDong-/7e4c4cae5cbbc44400a05fba65f06f23
+	
+newton raphsone : 
+	https://en.wikipedia.org/wiki/Newton%27s_method
+	
+nweton raphsone for sqrt root :
+	https://youtu.be/iKmopQnFo_E?si=wgNp0_rbfQ1XPWLl
+	
+Taylor's theorem: 
+	https://en.wikipedia.org/wiki/Taylor%27s_theorem
+	
+	
+Développements limités usuels :
+	https://math.univ-cotedazur.fr/~frapetti/analyse/FormulaireDL.pdf
+	
+exp(x) idea : 
+	https://stackoverflow.com/questions/6984440/approximate-ex
+	
+cos , sin and tan relation :
+	https://www.adelaide.edu.au/mathslearning/ua/media/36/useful-trig-identities.pdf
+
+How Floating-Point Numbers Are Represented :
+	https://www.geeksforgeeks.org/computer-organization-architecture/ieee-standard-754-floating-point-numbers/
+	https://www.youtube.com/watch?v=bbkcEiUjehk
+
+IEEE 754 :
+	https://en.wikipedia.org/wiki/IEEE_754
+	https://docs.nvidia.com/cuda/pdf/Floating_Point_on_NVIDIA_GPU.pdf
