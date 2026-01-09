@@ -60,7 +60,7 @@ Exponential function exp(x)
 
 Natural logarithm ln(x)
 
-These functions are implemented using:
+<h2>These functions are implemented using:</h2>
 
 Polynomial approximations
 
