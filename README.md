@@ -92,6 +92,8 @@ Protection against invalid operations
   gcc main.c -o main
 
   ./main
+ <h3>Screenshot</h3>
+  <img src="Screenshot.png" >
 
 <h2>Conclusion</h2>
 
