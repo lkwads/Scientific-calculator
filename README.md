@@ -89,8 +89,9 @@ Domain validation for ln(x), √x, inverse(x)
 Protection against invalid operations
 
 <h2>how to use it</h2>
-gcc main.c -o main
-./main
+  gcc main.c -o main
+
+  ./main
 
 <h2>Conclusion</h2>
 
