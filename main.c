@@ -1,12 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-
-
-
-
-
-//declaration of fonction
+// Declaration of functions
 void print_logo();
 float add(float x, float y);
 float soust(float x, float y);
@@ -23,13 +18,9 @@ float cos_x(float x);
 float sin_x(float x);
 float tan_x(float x);
 
-
-
-
-
 int main(){
 
-	//variable declrations 
+	// Variable declarations
 	float x, y;
 	int opera, order ;
 	double res ;
@@ -43,14 +34,13 @@ int main(){
 		printf("y = ");
 		scanf("%f", &y);
 		print_logo();
-		printf("choise opration: ");
+		printf("Choice of operation: ");
 		scanf("%d", &opera);
-
 
 		switch (opera)
 		{
 		case 0:
-			printf("exiting ... \n");
+			printf("Exiting ... \n");
 			break;
 		case 1:
 			res = multi(x , y);
@@ -71,10 +61,10 @@ int main(){
 			break;
 		case 5:
 			if(x<0){
-				printf("negative numbers are not accepted \n");
+				printf("Negative numbers are not accepted \n");
 				error = 1;
 			}else{
-				printf("what is order of this sqrt : ");
+				printf("What is the order of this sqrt? ");
 				scanf("%d", &order);
 				res = racine(x, order);
 				string = "√x = ";
@@ -86,7 +76,7 @@ int main(){
 			break;
 		case 7 :
 			if(y == 0){
-				printf("[-] division by zero is not possible\n");
+				printf("[-] Division by zero is not possible\n");
 				error = 1;
 			}else{
 				res = division(x,y);
@@ -100,7 +90,7 @@ int main(){
 				else if(y == 0)
 					res = 1 ;
 				else
-					printf("[-] not found right but you can calculating sqrt\n");
+					printf("[-] Not found correct value, but you can calculate sqrt\n");
 			}else 
 				res = puissance(x,y);
 
@@ -108,7 +98,7 @@ int main(){
 			break;
 		case 9:
 			if(x == 0){
-				printf("negative numbers are not accepted \n");
+				printf("Negative numbers are not accepted \n");
 				error = 1;
 			}else
 				res = inverse(x);
@@ -132,14 +122,14 @@ int main(){
 			break;
 		case 14:
 			if(x<=0){
-				printf("[-] this fonction is not defined in this domaine \n");
+				printf("[-] This function is not defined in this domain \n");
 				error = 1;
 			}else
 				res = Ln_x(x);
 				string = "ln(x) = ";
 			break;
 		default:
-			printf("[-] this operation is not found !\n");
+			printf("[-] This operation is not found!\n");
 			break;
 		}
 
@@ -151,25 +141,23 @@ int main(){
 	return 0;
 }
 
-
 float Ln_x(float x){
-	// for take exponent and mantisa from bx 
+	// Take exponent and mantissa from bx
 	unsigned int bx = * (unsigned int *) (&x);
-	// shift mantisa for take just exponent right now bit of sign and expoenet in ex variable 
+	// Shift mantissa to extract only exponent bits into ex variable
 	unsigned int ex = bx >> 23;
 
-	// ex valeur - 127 to find t t is used for cacule t*ln(2)
+	// Subtract 127 from exponent to find t, which is used to calculate t*ln(2)
 	signed int t = (signed int)ex-(signed int)127;
 	unsigned int s = (t < 0) ? (-t) : t; 
 
-	// this 1065353216 is 1 in float and this (bx & 8388607) take mantisa partie from bx  and right now bx = mantissa valeu + 1 so bx = epsilone
+	// 1065353216 represents 1 in float, and (bx & 8388607) extracts the mantissa
+	// Now bx = mantissa value + 1, so bx = epsilon
 	bx = 1065353216 | (bx & 8388607);
 	x = * (float *) (&bx);
-	// this repsente ln(epsilone ) with 1<= epsilone <= 2 and this 0.6931471806*abs(t) for cacule ln(2)*t and restunr result
+	// This represents ln(epsilon) with 1 <= epsilon <= 2, and 0.6931471806*abs(t) calculates ln(2)*t, then returns result
 	return -1.49278+(2.11263+(-0.729104+0.10969*x)*x)*x+0.6931471806*t;
 }
-
-
 
 float Exp_x(double x) {
 
@@ -179,140 +167,105 @@ float Exp_x(double x) {
     // z = x / ln(2)
     float y = x * inv_ln2;
 
-    // split z = k + r pour calcule 2^k et utilise polynome pour aproximation de 2^r
+    // Split z = k + r to calculate 2^k and use polynomial for approximation of 2^r
     int k = (int)y;
     float r = y - k;
 
-    // polynomial approximation for 2^r
+    // Polynomial approximation for 2^r
     float p = 1.0 + r * ln2 + 0.5 * (r * ln2) * (r * ln2);
 
-    // build 2^k using exponent bits find 2^k with set k+127 in exponent place and set 0 in manitssa and bit of sign
+    // Build 2^k using exponent bits, set k+127 in exponent and 0 in mantissa and sign bit
     unsigned  bits = ((unsigned)(k + 127)) << 23;
     float two_k = *(float*)&bits;
 
-	// return 2^k *2^r
+	// Return 2^k * 2^r
     return two_k * p;
 }
-
-
-
 
 float cos_x(float x){
 
     const double PI = 3.141592653589793;
 
-    // divise x/2pi and convert it to int and multiple 2*pi (13/2pi = 3.6 and 3.6 =3 int 3*2pi and we find the x with 2*pi*k + x )
+    // Reduce x modulo 2*pi and convert to [-pi, pi]
     x = x - (int)(x / (2*PI)) * (2*PI);
-
-	//this to get x in[-pi , pi] , taylor methode work perfect in 0 
     if (x > PI)  x -= 2*PI;
     if (x < -PI) x += 2*PI;
 
-    double x2 = x * x;
+	double x2 = x * x;
 
-
-	//taylor-young methode for cos
-    double cos_x =
+	// Taylor-Young method for cosine
+	double cos_x =
         1
         - x2 / 2
         + x2 * x2 / 24
         - x2 * x2 * x2 / 720
         + x2 * x2 * x2 * x2 / 40320;
 
-		return cos_x ;
+	return cos_x ;
 }
-
-
 
 float sin_x(float x){
 
-
 	const double PI = 3.141592653589793;
 
-    // divise x/2pi and convert it to int and multiple 2*pi (13/2pi = 3.6 and 3.6 =3 int 3*2pi and we find the x with 2*pi*k + x )
+    // Reduce x modulo 2*pi and convert to [-pi, pi]
     x = x - (int)(x / (2*PI)) * (2*PI);
-
-	//this to get x in[-pi , pi] , taylor methode work perfect in 0 
     if (x > PI) 
 		x -= 2*PI;
-
     if (x < -PI) 
 		x += 2*PI;
 
-    double x2 = x * x;
+	double x2 = x * x;
 
-	//taylor young methode for sin
+	// Taylor-Young method for sine
 	double sin_x = x - x2*x/factoriel(3) + x2*x2*x/factoriel(5) -x2*x2*x2*x/factoriel(7) ;
 
 	return sin_x ;
-
 }
-
-
 
 float tan_x(float x){
-
-	// tan(x) = sin(x) / cos(x)
+	// tan(x) = sin(x)/cos(x)
 	return sin_x(x)/cos_x(x) ;
-	
 }
-
-
-
 
 float add(float x , float y){
 	return (x+y);
 }
 
-
-
 float division(float x, float y){
 	return x/y ;
 }
-
 
 float soust(float x, float y){
 	return (x-y);
 }
 
-
-
 float multi(float x, float y){
 	return (x*y);
 }
-
-
 
 double v_abs(double x){
     return (x < 0) ? -x : x ;
 }
 
-
-
-
 double puissance(double x, int n){
 	double re = 1.0 ;
-
 	for(int i=1; i<=n; ++i){
 		re *= x; 
 	}
 	return re;
 }
 
-
-
-// calcule f(x)
-float f(float x, float y, int oredr){
+// Calculate f(x)
+float f(float x, float y, int order){
     float z=1;
-    for(int i = 1; i<=oredr ; i++){
+    for(int i = 1; i<=order ; i++){
         z *= x;
     }
     return z - y;
 }
 
-
-
-// derivie de la fonction 
+// Derivative of the function
 float de_f(float x, int order){
     float z =1 ;
     for(int i=1; i<order; i++){
@@ -321,18 +274,16 @@ float de_f(float x, int order){
     return order*z;
 }
 
-
-
-// Function cacule racine avec la relation de  Newton-Raphson method
-//this fonction you can choise order of root not just root 2
+// Calculate root using Newton-Raphson method
+// You can choose the order of the root, not just square root
 float racine(float x, int order)
 {
     const float difference = 0.00001;
 
-	//intisalisation of xn for Newton-Raphson methode 
+	// Initialization of x_n for Newton-Raphson method
     float  x_n = x/order;
 
-	// loop stop when xn^2 - N < 0.00001 to take aproximation evry smaller ro real result
+	// Loop stops when xn^order - N < 0.00001 to approximate the real result
     while(abs(f(x_n, x, order)) >= difference){
 		
 		// xn+1 = xn - f(xn)/f'(xn)
@@ -341,9 +292,8 @@ float racine(float x, int order)
     return x_n;
 }
 
-
 int factoriel(int x){
-	// we strat from x and we finish in 1 this is factoriel 
+	// Calculate factorial from x down to 1
 	int res = 1;
 	for(int i=x; i>1 ; i--){
 		res *= i ;
@@ -351,12 +301,9 @@ int factoriel(int x){
 	return res ;
 }
 
-
-
 float inverse(float x){
 	return 1/x;
 }
-
 
 void print_logo(){
 
@@ -396,10 +343,7 @@ void print_logo(){
 	"                                   by lkwads\n"
 
 );
-
 }
 
-
-
-// by lkwads 
-// all resource in the file resource you can learn more
+// by mohamed soussi
+// All resources are in the resource file. You can learn more.
